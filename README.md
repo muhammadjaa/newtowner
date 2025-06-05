@@ -221,12 +221,12 @@ To use the EC2 provider, you need to configure SSH access for both the EC2 insta
        "ec2_host": "your-ec2-hostname-or-ip",
        "ec2_port": 22,
        "ec2_user": "ec2-user",
-       "ec2_key_path": "path/to/ec2/private/key",
+       "ec2_private_key_path": "path/to/ec2/private/key",
        "ec2_passphrase": "optional-key-passphrase",
        "ssh_host": "your-comparison-hostname-or-ip",
        "ssh_port": 22,
        "ssh_user": "ssh-user",
-       "ssh_key_path": "path/to/ssh/private/key",
+       "ssh_private_key_path": "path/to/ssh/private/key",
        "ssh_passphrase": "optional-key-passphrase"
      }
      ```
