@@ -1,0 +1,22 @@
+stages:
+  - check_urls
+
+http_check_job:
+  stage: check_urls
+  image: python:3.9-slim
+  variables:
+    DEFAULT_OUTPUT_FILE: "result.json"
+  before_script:
+    - pip install requests
+  script:
+    - python scripts/http_check_runner.py "$TARGET_URLS" --output_file "$DEFAULT_OUTPUT_FILE"
+    - echo "Python script finished. Results should be in $DEFAULT_OUTPUT_FILE"
+  artifacts:
+    paths:
+      - "$DEFAULT_OUTPUT_FILE"
+    when: always
+    expire_in: 7 days
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "trigger" 
+      when: on_success
+    - when: never 

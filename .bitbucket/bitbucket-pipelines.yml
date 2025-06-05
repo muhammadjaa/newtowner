@@ -1,0 +1,47 @@
+image: python:3.11
+
+pipelines:
+  custom:
+    newtowner-http-check:
+      - variables:
+          - name: TARGET_URLS
+            default: ""
+          - name: RUN_ID_TAG
+            default: ""
+          - name: REPO_ACCESS_TOKEN
+            default: ""
+      - step:
+          name: "Newtowner HTTP Check"
+          script:
+            # Validate required variables
+            - |
+              if [ -z "$TARGET_URLS" ]; then
+                echo "ERROR: TARGET_URLS variable is required"
+                exit 1
+              fi
+            - |
+              if [ -z "$RUN_ID_TAG" ]; then
+                echo "ERROR: RUN_ID_TAG variable is required"
+                exit 1
+              fi
+            - |
+              if [ -z "$REPO_ACCESS_TOKEN" ]; then
+                echo "ERROR: REPO_ACCESS_TOKEN variable is required for downloads upload"
+                exit 1
+              fi
+
+            # Install dependencies
+            - python -m pip install --upgrade pip
+            - pip install requests
+
+            - python scripts/http_check_runner.py "$TARGET_URLS" --output_file result.json
+
+            - |
+              RESULT_FILENAME="newtowner-check-result-${RUN_ID_TAG}.json"
+              cp result.json "$RESULT_FILENAME"
+              curl -X POST -H "Authorization: Bearer ${REPO_ACCESS_TOKEN}" \
+                "https://api.bitbucket.org/2.0/repositories/${BITBUCKET_REPO_OWNER}/${BITBUCKET_REPO_SLUG}/downloads" \
+                --form files=@"$RESULT_FILENAME"
+              echo "Results uploaded to downloads as: $RESULT_FILENAME"
+          artifacts:
+            - result.json

@@ -1,0 +1,9 @@
+{
+    "github_pat":"KEYHERE",
+    "gitlab_pat":"KEYHERE",
+    "bitbucket_username":"YOUR_BITBUCKET_USERNAME_HERE",
+    "bitbucket_app_password":"KEYHERE",
+    "brightdata_api_key":"KEYHERE",
+    "aws_access_key_id":"KEYHERE",
+    "aws_secret_access_key":"KEYHERE"
+}
