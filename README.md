@@ -245,3 +245,8 @@ The tool will:
 3. Compare the responses to identify potential trust boundary bypasses
 4. Auto-detect and display geographic information for both hosts
 5. Clean up temporary files after each check
+
+#### Credits
+
+Jordan Macey - [Assetnote](https://assetnote.io)
+[Shubham Shah](https://x.com/infosec_au) - [Assetnote](https://assetnote.io)
