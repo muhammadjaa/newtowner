@@ -249,4 +249,5 @@ The tool will:
 #### Credits
 
 Jordan Macey - [Assetnote](https://assetnote.io)
+
 [Shubham Shah](https://x.com/infosec_au) - [Assetnote](https://assetnote.io)
